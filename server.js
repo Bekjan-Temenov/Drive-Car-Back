@@ -8,7 +8,7 @@ const adsRouter = require("./routes/adsRouter");
 const reviewsRouter = require("./routes/reviewsRouter");
 
 const app = express();
-const port = 3300;
+const port = process.env.PORT || 3300;
 
 app.use(
   cors({
