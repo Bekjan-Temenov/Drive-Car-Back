@@ -157,9 +157,9 @@ const getCars = async (req, res) => {
 
     res.status(200).json(carsWithImageUrls);
   } catch (error) {
-    console.error("❌ Ошибка получения автомобилей:", error);
+    console.error("❌ Ошибка получения автомобилей ghj:", error);
     console.error("Stack:", error.stack);
-    res.status(500).json({ error: "Ошибка получения автомобилей" });
+    res.status(500).json({ error: "Ошибка получения автомобилей sdfg" });
   }
 };
 
