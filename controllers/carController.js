@@ -273,6 +273,8 @@ const deleteCar = async (req, res) => {
 
 const getCarById = async (req, res) => {
   const { id } = req.params;
+  console.log("🚗 getCars id вызван");
+  console.log("Query params id:", req.query);
 
   try {
     const car = await pool.query(
@@ -284,7 +286,7 @@ const getCarById = async (req, res) => {
         `,
       [id]
     );
-
+    console.log("✅ Запрос выполнен, строк id:", car.rows.length);
     if (car.rows.length === 0) {
       return res.status(404).json({ error: "Автомобиль не найден" });
     }
@@ -294,8 +296,9 @@ const getCarById = async (req, res) => {
 
     res.status(200).json({ ...carData, images });
   } catch (error) {
-    console.error("Ошибка получения автомобиля:", error.message);
-    res.status(500).json({ error: "Ошибка получения автомобиля" });
+    console.error("❌ Ошибка получения автомобилей id:", error);
+    console.error("Stack id:", error.stack);
+    res.status(500).json({ error: "Ошибка получения автомобилей id" });
   }
 };
 
@@ -316,6 +319,7 @@ const deleteAllImages = async (req, res) => {
         }
       });
     });
+
 
     res.status(200).json({ message: "Все изображения успешно удалены" });
   });
