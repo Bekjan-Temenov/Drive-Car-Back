@@ -11,7 +11,7 @@ const swaggerOptions = {
     },
     servers: [
       {
-        url: "http://localhost:3300",
+        url: "https://drive-car-back.onrender.com",
       },
     ],
   },

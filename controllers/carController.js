@@ -63,6 +63,8 @@ const createCar = async (req, res) => {
 
 const getCars = async (req, res) => {
   const { minPrice, maxPrice, sort, search, price } = req.query;
+  console.log("🚗 getCars вызван");
+  console.log("Query params:", req.query);
 
   try {
     let query = `
@@ -127,6 +129,7 @@ const getCars = async (req, res) => {
       query += " ORDER BY c.id ASC";
     }
     const cars = await pool.query(query, params);
+    console.log("✅ Запрос выполнен, строк:", cars.rows.length);
 
     const carsWithImages = cars.rows.reduce((acc, car) => {
       const { image_url, ...carData } = car;
@@ -154,7 +157,8 @@ const getCars = async (req, res) => {
 
     res.status(200).json(carsWithImageUrls);
   } catch (error) {
-    console.error("Ошибка получения автомобилей:", error.message);
+    console.error("❌ Ошибка получения автомобилей:", error);
+    console.error("Stack:", error.stack);
     res.status(500).json({ error: "Ошибка получения автомобилей" });
   }
 };
